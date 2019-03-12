@@ -1,5 +1,5 @@
 node{
-   stage('GIT Checkout'){
+   stage('GIT code Checkout'){
      git 'https://github.com/damodaranj/my-app.git'
    }
    stage('Compile-Package'){
