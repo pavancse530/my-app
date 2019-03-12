@@ -1,6 +1,6 @@
 node{
    stage('SCM Checkout'){
-     git 'https://github.com/prabaharan0312126/my-app.git'
+     git 'https://github.com/damodaranj/my-app.git'
    }
    stage('Compile-Package'){
     
@@ -33,5 +33,4 @@ stage('SonarQube Analysis') {
 	          sh "${mvnHome}/bin/mvn sonar:sonar"
 	        }
 	    }
-
-   }
+}
