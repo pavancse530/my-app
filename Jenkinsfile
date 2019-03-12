@@ -1,5 +1,5 @@
 node{
-   stage('GIT code Checkout'){
+   stage('SCM Checkout'){
      git 'https://github.com/damodaranj/my-app.git'
    }
    stage('Compile-Package'){
@@ -14,8 +14,13 @@ node{
    stage('Docker Image Push'){
    withCredentials([string(credentialsId: 'dockerPass', variable: 'dockerPassword')]) {
    sh "docker login -u damocharms -p ${dockerPassword}"
-   }
+    }
    sh 'docker push damocharms/myweb:0.0.2'
+   }
+   stage('Nexus Image Push'){
+   sh "docker login -u admin -p admin123 52.66.247.105:8050"
+   sh "docker tag damocharms/myweb:0.0.2 52.66.247.105:8050/damo:1.0.0"
+   sh 'docker push 52.66.247.105:8050/damo:1.0.0'
    }
     stage('Remove Previous Container'){
 	try{
@@ -33,4 +38,5 @@ stage('SonarQube Analysis') {
 	          sh "${mvnHome}/bin/mvn sonar:sonar"
 	        }
 	    }
-}
+
+   }
