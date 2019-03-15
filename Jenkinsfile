@@ -39,4 +39,4 @@ stage('SonarQube Analysis') {
 	        }
 	    }
 
-}
+   }
