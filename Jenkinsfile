@@ -3,7 +3,7 @@ node{
      git 'https://github.com/damodaranj/my-app.git'
    }
    stage('Compile-Package'){
-    
+
       def mvnHome =  tool name: 'maven3', type: 'maven'   
       sh "${mvnHome}/bin/mvn clean package"
 	  sh 'mv target/myweb*.war target/newapp.war'
@@ -18,9 +18,9 @@ node{
    sh 'docker push damocharms/myweb:0.0.2'
    }
    stage('Nexus Image Push'){
-   sh "docker login -u admin -p admin123 13.127.145.196:8083"
-   sh "docker tag damocharms/myweb:0.0.2 13.127.145.196:8083/damo:1.0.0"
-   sh 'docker push 13.127.145.196:8083/damo:1.0.0'
+   sh "docker login -u admin -p admin123 13.234.33.186:8083"
+   sh "docker tag damocharms/myweb:0.0.2 13.234.33.186:8083/damo:1.0.0"
+   sh 'docker push 13.234.33.186:8083/damo:1.0.0'
    }
     stage('Remove Previous Container'){
 	try{
