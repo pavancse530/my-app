@@ -9,18 +9,18 @@ node{
 	  sh 'mv target/myweb*.war target/newapp.war'
    }
    stage('Build Docker Imager'){
-   sh 'docker build -t damocharms/myweb:0.0.2 .'
+   sh 'docker build -t saidamo/myweb:0.0.2 .'
    }
    stage('Docker Image Push'){
    withCredentials([string(credentialsId: 'dockerPass', variable: 'dockerPassword')]) {
-   sh "docker login -u damocharms -p ${dockerPassword}"
+   sh "docker login -u saidamo -p ${dockerPassword}"
     }
-   sh 'docker push damocharms/myweb:0.0.2'
+   sh 'docker push saidamo/myweb:0.0.2'
    }
    stage('Nexus Image Push'){
-   sh "docker login -u admin -p admin123 3.6.36.180:8085"
-   sh "docker tag damocharms/myweb:0.0.2 3.6.36.180:8085/damo:1.0.0"
-   sh 'docker push 3.6.36.180:8085/damo:1.0.0'
+   sh "docker login -u admin -p admin123 15.206.90.217:8083"
+   sh "docker tag saidamo/myweb:0.0.2 15.206.90.217:8083/damo:1.0.0"
+   sh 'docker push 15.206.90.217:8083/damo:1.0.0'
    }
     stage('Remove Previous Container'){
 	try{
@@ -29,7 +29,7 @@ node{
 		//  do nothing if there is an exception
 	}
    stage('Docker deployment'){
-   sh 'docker run -d -p 8090:8080 --name tomcattest damocharms/myweb:0.0.2' 
+   sh 'docker run -d -p 8090:8080 --name tomcattest saidamo/myweb:0.0.2' 
    }
 }
 stage('SonarQube Analysis') {
