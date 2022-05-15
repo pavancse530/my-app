@@ -8,12 +8,12 @@ node{
       sh "${mvnHome}/bin/mvn clean package"
 	  sh 'mv target/myweb*.war target/newapp.war'
    }
-   stage('SonarQube Analysis') {
+    stage('SonarQube Analysis') {
 	        def mvnHome =  tool name: 'maven3', type: 'maven'
 	        withSonarQubeEnv('sonar') { 
 	          sh "${mvnHome}/bin/mvn sonar:sonar"
 	        }
-	    }
+	   }
    stage('Build Docker Image'){
    sh 'docker build -t pavancse530/myweb:0.0.2 .'
    }
@@ -24,9 +24,9 @@ node{
    sh 'docker push pavancse530/myweb:0.0.2'
    }
    stage('Nexus Image Push'){
-   sh "docker login -u admin -p admin123 3.110.204.26:8083"
-   sh "docker tag pavancse530/myweb:0.0.2 3.110.204.26:8083/pavan:1.0.0"
-   sh 'docker push 3.110.204.26:8083/pavan:1.0.0'
+   sh "docker login -u admin -p admin123 3.111.55.102:8083"
+   sh "docker tag pavancse530/myweb:0.0.2 3.111.55.102:8083/pavan:1.0.0"
+   sh 'docker push 3.111.55.102:8083/pavan:1.0.0'
    }
    stage('Remove Previous Container'){
 	try{
