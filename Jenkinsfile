@@ -24,9 +24,10 @@ node{
    sh 'docker push pavancse530/myweb:0.0.2'
    }
    stage('Nexus Image Push'){
-   withCredentials([string(credentialsId: 'NexusPass', variable: 'NexusPassword')]) {
-   sh "docker login -u admin -p ${NexusPassword} http://15.206.212.135:8083"
-}
+   sh "docker login -u admin -p admin123 13.127.98.228:8083"
+   sh "docker tag pavancse530/myweb:0.0.2 13.127.98.228:8083/pavan:1.0.0"
+   sh 'docker push 13.127.98.228:8083/pavan:1.0.0'
+   }
    sh "docker tag pavancse530/myweb:0.0.2 15.206.212.135:8083/pavan:1.0.0"
    sh 'docker push 15.206.212.135:8083/pavan:1.0.0'
    }
