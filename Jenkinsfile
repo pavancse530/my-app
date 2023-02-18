@@ -28,9 +28,6 @@ node{
    sh "docker tag pavancse530/myweb:0.0.2 13.127.98.228:8083/pavan:1.0.0"
    sh 'docker push 13.127.98.228:8083/pavan:1.0.0'
    }
-   sh "docker tag pavancse530/myweb:0.0.2 15.206.212.135:8083/pavan:1.0.0"
-   sh 'docker push 15.206.212.135:8083/pavan:1.0.0'
-   }
    stage('Remove Previous Container'){
 	try{
 		sh 'docker rm -f tomcattest'
